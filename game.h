@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <SFML/Graphics.hpp>
 #include "Entity.h"
 #include "TileOptions.h"
@@ -43,9 +43,11 @@ private:
 	bool isColiding(const Entity& entity1, const Entity& entity2);
 public:
 	void Draw();
+	void DrawMenu();
 	void DrawPlay();
 	void DrawLevelEditor();
 
+	void HandleMenuInput(sf::Event& event);
 	void HandlePlayInput();
 	void HandleLevelEditorInput();
 	void HandleInput();
@@ -61,10 +63,23 @@ public:
 	bool CanPlaceTowerAtPosition(const sf::Vector2f& pos);
 
 	void AddGold(int gold);
+
+	// Menu functions
+	void StartGame(int level = 1);  // Hàm bắt đầu game từ menu
+	void ReturnToMenu();           // Hàm quay về menu
+	void ExitGame();              // Hàm thoát game
+
+	// Volume control
+	void SetMusicVolume(float volume);
+	void SetSoundVolume(float volume);
+
 private:
 	sf::RenderWindow m_Window;
 	sf::Time m_deltaTime;
 	GameMode m_eGameMode;
+
+	//Menu
+	MenuManager m_MenuManager;
 
 	//Play mode
 	sf::Texture towerTexture;
@@ -105,10 +120,18 @@ private:
 	int m_iPlayerHealth;
 	int m_iPlayerGold;
 	int m_iGoldGainedThisUpdate;
+	int m_iCurrentLevel;
 	float m_fTimeInPlayMode;
 	float m_fDifficulty;
 	float m_fGoldPerSecond;
 	float m_fGoldPerSecondTimer;
+
+	// Game state
+	bool m_bGameRunning;
+
+	// Sound related
+	bool m_bGameOverSoundPlayed;
+
 private:
 	//PathFinding
 	typedef vector<PathTile> Path;

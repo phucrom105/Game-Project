@@ -6,6 +6,8 @@
 #include <algorithm>
 #include <cassert>
 #include "DamageTextManager.h"
+#include "SoundManager.h"
+#include "MenuManager.h"
 
 Game::Game()
     : m_Window(sf::VideoMode({ 1920 , 1080 }), "SFML window")
@@ -18,12 +20,20 @@ Game::Game()
     , m_bDrawPath(true)
     , m_iPlayerHealth(10)
     , m_iPlayerGold(10)
+    , m_iCurrentLevel(1)
     , m_fTimeInPlayMode(0.0f)
     , m_fDifficulty(1.0f)
     , m_iGoldGainedThisUpdate(0)
     , m_fGoldPerSecond(0.0f)
     , m_fGoldPerSecondTimer(0.0f)
+    , m_bGameRunning(true)
 {
+
+    // Initialize SoundManager
+    SoundManager::getInstance().Initialize();
+    SoundManager::getInstance().PlayBackgroundMusic();
+
+
     // Load textures and check return values
     if (!towerTexture.loadFromFile("image/player.png")) {
         throw std::runtime_error("Failed to load player texture from 'image/player.png'");
@@ -49,7 +59,7 @@ Game::Game()
     m_enemyTemplate.setCirclePhysics(40.f); // Set the enemy as a circle with a radius of 80 pixels
     m_enemyTemplate.GetPhysicsDataNonConst().setLayers(Entity::PhysicsData::Layer::Enemy);
     m_enemyTemplate.SetHealth(3);
-    
+
     m_axeTemplate.SetTexture(axeTexture);
     m_axeTemplate.SetScale(sf::Vector2f(5, 5));
     m_axeTemplate.SetOrigin(sf::Vector2f(8, 8));
@@ -100,13 +110,17 @@ Game::Game()
                 }
             }
 
+            m_MenuManager.Initialize(m_Window);
+
             TileOptions& tileOption = m_TileOptions.emplace_back(eTileType);
             tileOption.setSprite(tileSprite);
         }
     }
 }
 
-Game::~Game() {}
+Game::~Game() {
+    SoundManager::getInstance().Cleanup();
+}
 
 void Game::run() {
     sf::Clock clock;
@@ -128,7 +142,15 @@ void Game::run() {
 void Game::UpdatePlay() {
     m_fTimeInPlayMode += m_deltaTime.asSeconds();
     m_fDifficulty += m_deltaTime.asSeconds() / 10.0f;
-    if (m_iPlayerHealth <= 0) return;
+    if (m_iPlayerHealth <= 0) {
+        static bool gameOverSoundPlayed = false;
+        if (!gameOverSoundPlayed) {
+            SoundManager::getInstance().StopBackgroundMusic();
+            SoundManager::getInstance().PlayGameOverSound();
+            gameOverSoundPlayed = true;
+        }
+        return;
+    }
 
     DamageTextManager::getInstanceNonConst().Update(m_deltaTime);
     UpdateTower();
@@ -232,6 +254,9 @@ void Game::UpdateTower() {
         vTowerToEnemy = MathHelpers::normalize(vTowerToEnemy);
         newAxe.SetVelocity(vTowerToEnemy * 500.0f);
 
+        // Play hit/attack sound
+        SoundManager::getInstance().PlayHitSound();
+
         //Reset the axe throw
         tower.m_fAttackTimer = 1.0f;
     }
@@ -262,6 +287,8 @@ void Game::CheckForDeletionRequest() {
             m_enemies.erase(m_enemies.begin() + i);
             //m_iPlayerGold += 1;
             AddGold(1);
+            // Play enemy death sound
+            SoundManager::getInstance().PlayEnemyDeathSound();
         }
     }
 }
@@ -821,6 +848,10 @@ bool Game::CreateTowerAtPosition(const sf::Vector2f& pos) {
         Entity newTower = m_TowerTemplate;
         newTower.SetColor(sf::Color::White);
         m_Towers.push_back(newTower);
+
+        // Play tower placement sound
+        SoundManager::getInstance().PlayTowerPlaceSound();
+
         return true;
     }
     return false;
@@ -862,4 +893,12 @@ bool Game::CanPlaceTowerAtPosition(const sf::Vector2f& pos) {
 void Game::AddGold(int gold) {
     m_iPlayerGold += gold;
     m_iGoldGainedThisUpdate += gold;
+}
+
+void Game::SetMusicVolume(float volume) {
+    SoundManager::getInstance().SetMusicVolume(volume);
+}
+
+void Game::SetSoundVolume(float volume) {
+    SoundManager::getInstance().SetSoundVolume(volume);
 }
