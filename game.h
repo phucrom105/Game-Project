@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include "MenuManager.h"
 using namespace std;
 
 class Game {
@@ -30,6 +31,16 @@ public:
 	};
 
 	void run();
+
+	// Menu functions
+	void StartGame(int level);
+	void ReturnToMenu();
+	void ExitGame();
+
+	// Volume control
+	void SetMusicVolume(float volume);
+	void SetSoundVolume(float volume);
+
 private:
 	void UpdatePlay();
 	void UpdateTower();
@@ -51,6 +62,9 @@ public:
 	void HandlePlayInput();
 	void HandleLevelEditorInput();
 	void HandleInput();
+	void HandleGameInput(sf::Event& event);
+	void HandleKeyboardInput();
+	void ResetGameState();
 
 	//Level Editor functions
 	void CreateTileAtPosition(const sf::Vector2f& pos);
@@ -64,22 +78,10 @@ public:
 
 	void AddGold(int gold);
 
-	// Menu functions
-	void StartGame(int level = 1);  // Hàm bắt đầu game từ menu
-	void ReturnToMenu();           // Hàm quay về menu
-	void ExitGame();              // Hàm thoát game
-
-	// Volume control
-	void SetMusicVolume(float volume);
-	void SetSoundVolume(float volume);
-
 private:
 	sf::RenderWindow m_Window;
 	sf::Time m_deltaTime;
 	GameMode m_eGameMode;
-
-	//Menu
-	MenuManager m_MenuManager;
 
 	//Play mode
 	sf::Texture towerTexture;
@@ -140,4 +142,7 @@ private:
 	bool DoesPathContainCoordinates(const Path& path, const sf::Vector2i& coordinates);
 
 	vector<Path> m_Paths;
+
+	// Menu manager
+	MenuManager m_MenuManager;
 };

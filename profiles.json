@@ -1,0 +1,28 @@
+{
+    "profiles": [
+        {
+            "experience": 0,
+            "highScore": 0,
+            "level": 1,
+            "name": "Dava",
+            "savedDifficulty": 1.0,
+            "savedEnemyPath": [],
+            "savedGold": 10,
+            "savedLevel": 1,
+            "savedMapLayout": [],
+            "savedTowers": []
+        },
+        {
+            "experience": 0,
+            "highScore": 0,
+            "level": 1,
+            "name": "as",
+            "savedDifficulty": 1.0,
+            "savedEnemyPath": [],
+            "savedGold": 10,
+            "savedLevel": 1,
+            "savedMapLayout": [],
+            "savedTowers": []
+        }
+    ]
+}

@@ -21,12 +21,6 @@ C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\Enti
 C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\Entity.h(169,39): warning C4244:         ]
   (compiling source file 'game.cpp')
   
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.h(82,14): error C3646: 'm_MenuManager': unknown override specifier
-  (compiling source file 'game.cpp')
-  
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.h(82,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'game.cpp')
-  
 C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\MathHelpers.h(37,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   (compiling source file 'game.cpp')
   
@@ -36,82 +30,45 @@ C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\Math
 C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\DamageTextManager.h(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
   (compiling source file 'game.cpp')
   
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(113,13): error C2065: 'm_MenuManager': undeclared identifier
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(177,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(277,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(284,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(652,11): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(652,11): warning C4244:         with
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(652,11): warning C4244:         [
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(652,11): warning C4244:             T=float
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(652,11): warning C4244:         ]
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(653,11): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(653,11): warning C4244:         with
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(653,11): warning C4244:         [
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(653,11): warning C4244:             T=float
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(653,11): warning C4244:         ]
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(665,44): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(665,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(682,11): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(682,11): warning C4244:         with
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(682,11): warning C4244:         [
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(682,11): warning C4244:             T=float
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(682,11): warning C4244:         ]
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(683,11): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(683,11): warning C4244:         with
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(683,11): warning C4244:         [
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(683,11): warning C4244:             T=float
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(683,11): warning C4244:         ]
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(686,53): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(686,53): warning C4244:         with
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(686,53): warning C4244:         [
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(686,53): warning C4244:             T=float
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(686,53): warning C4244:         ]
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(686,39): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(686,39): warning C4244:         with
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(686,39): warning C4244:         [
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(686,39): warning C4244:             T=float
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(686,39): warning C4244:         ]
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(817,50): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  main.cpp
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\Entity.h(169,62): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\Entity.h(169,62): warning C4244:         with
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\Entity.h(169,62): warning C4244:         [
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\Entity.h(169,62): warning C4244:             T=float
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\Entity.h(169,62): warning C4244:         ]
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\Entity.h(169,62): warning C4244:         and
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\Entity.h(169,62): warning C4244:         [
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\Entity.h(169,62): warning C4244:             T=int
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\Entity.h(169,62): warning C4244:         ]
-  (compiling source file 'main.cpp')
-  
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\Entity.h(169,39): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\Entity.h(169,39): warning C4244:         with
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\Entity.h(169,39): warning C4244:         [
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\Entity.h(169,39): warning C4244:             T=float
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\Entity.h(169,39): warning C4244:         ]
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\Entity.h(169,39): warning C4244:         and
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\Entity.h(169,39): warning C4244:         [
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\Entity.h(169,39): warning C4244:             T=int
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\Entity.h(169,39): warning C4244:         ]
-  (compiling source file 'main.cpp')
-  
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.h(82,14): error C3646: 'm_MenuManager': unknown override specifier
-  (compiling source file 'main.cpp')
-  
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.h(82,2): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'main.cpp')
-  
-  MenuManager.cpp
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\MenuManager.cpp(111,73): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\MenuManager.cpp(111,73): warning C4244:         with
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\MenuManager.cpp(111,73): warning C4244:         [
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\MenuManager.cpp(111,73): warning C4244:             T=float
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\MenuManager.cpp(111,73): warning C4244:         ]
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\MenuManager.cpp(111,52): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\MenuManager.cpp(111,52): warning C4244:         with
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\MenuManager.cpp(111,52): warning C4244:         [
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\MenuManager.cpp(111,52): warning C4244:             T=float
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\MenuManager.cpp(111,52): warning C4244:         ]
-C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\MenuManager.cpp(254,31): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-  Generating Code...
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(200,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(317,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(324,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(816,22): warning C4566: character represented by universal-character-name '\U0001F4C1' cannot be represented in the current code page (1252)
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(816,22): warning C4566: character represented by universal-character-name '\u0110' cannot be represented in the current code page (1252)
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(816,22): warning C4566: character represented by universal-character-name '\u01B0' cannot be represented in the current code page (1252)
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(816,22): warning C4566: character represented by universal-character-name '\u1EEF' cannot be represented in the current code page (1252)
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(816,22): warning C4566: character represented by universal-character-name '\u1EC7' cannot be represented in the current code page (1252)
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(839,11): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(839,11): warning C4244:         with
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(839,11): warning C4244:         [
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(839,11): warning C4244:             T=float
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(839,11): warning C4244:         ]
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(840,11): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(840,11): warning C4244:         with
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(840,11): warning C4244:         [
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(840,11): warning C4244:             T=float
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(840,11): warning C4244:         ]
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(852,44): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(852,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(869,11): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(869,11): warning C4244:         with
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(869,11): warning C4244:         [
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(869,11): warning C4244:             T=float
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(869,11): warning C4244:         ]
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(870,11): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(870,11): warning C4244:         with
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(870,11): warning C4244:         [
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(870,11): warning C4244:             T=float
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(870,11): warning C4244:         ]
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(873,53): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(873,53): warning C4244:         with
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(873,53): warning C4244:         [
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(873,53): warning C4244:             T=float
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(873,53): warning C4244:         ]
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(873,39): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(873,39): warning C4244:         with
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(873,39): warning C4244:         [
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(873,39): warning C4244:             T=float
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(873,39): warning C4244:         ]
+C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\Game Project\game.cpp(1004,50): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  Game Project.vcxproj -> C:\Users\ASUS\OneDrive\Desktop\TOWER_DEFENSE-main\Game Project\x64\Debug\Game Project.exe

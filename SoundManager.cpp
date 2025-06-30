@@ -1,4 +1,4 @@
-#include "SoundManager.h"
+﻿#include "SoundManager.h"
 #include <iostream>
 
 SoundManager SoundManager::m_Instance;
@@ -112,6 +112,24 @@ void SoundManager::PlayBackgroundMusic() {
 
 void SoundManager::StopBackgroundMusic() {
     m_BackgroundMusic.stop();
+}
+
+void SoundManager::PauseBackgroundMusic() {
+    if (m_BackgroundMusic.getStatus() == sf::Music::Playing) {
+        m_BackgroundMusic.pause();
+    }
+}
+
+void SoundManager::ResumeBackgroundMusic() {
+    // Chỉ resume nếu nhạc đang ở trạng thái paused
+    if (m_BackgroundMusic.getStatus() == sf::Music::Paused) {
+        m_BackgroundMusic.play();
+    }
+    // Nếu nhạc chưa được load hoặc đã stop, thì bắt đầu phát từ đầu
+    else if (m_BackgroundMusic.getStatus() == sf::Music::Stopped) {
+        m_BackgroundMusic.play();
+    }
+    // Nếu đang phát rồi thì không làm gì cả
 }
 
 void SoundManager::PlayThrowingSound() {

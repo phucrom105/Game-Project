@@ -1,4 +1,4 @@
-#include "game.h"
+﻿#include "game.h"
 #include <SFML/Graphics.hpp>
 #include "MathHelpers.h"
 #include <random>
@@ -28,6 +28,9 @@ Game::Game()
     , m_fGoldPerSecondTimer(0.0f)
     , m_bGameRunning(true)
 {
+
+    // Initialize MenuManager first
+    m_MenuManager.Initialize(m_Window);
 
     // Initialize SoundManager
     SoundManager::getInstance().Initialize();
@@ -71,7 +74,7 @@ Game::Game()
 
     m_GameModeText.setPosition(sf::Vector2f(1000, 200));
     m_GameModeText.setFont(m_Font);
-    m_GameModeText.setString("Play Mode");
+    m_GameModeText.setString("Menu Mode");
 
     m_PlayerText.setPosition(sf::Vector2f(1500, 100));
     m_PlayerText.setString("Player");
@@ -116,30 +119,50 @@ Game::Game()
             tileOption.setSprite(tileSprite);
         }
     }
+    m_MenuManager.SetExitCallback([this]() {
+        this->ExitGame();
+        });
 }
 
 Game::~Game() {
     SoundManager::getInstance().Cleanup();
 }
+//enum class MenuItem { Play, Setting, Exit, NewProfile, ExistingProfile, PlayAsGuest, Back, Start };
 
 void Game::run() {
     sf::Clock clock;
     while (m_Window.isOpen()) {
         m_deltaTime = clock.restart();
         HandleInput();
-        switch (m_eGameMode) {
-        case Play:
-            UpdatePlay();
-            break;
-        case LevelEditor:
-            UpdateLevelEditor();
-            break;
+
+        // Kiểm tra nếu đang trong menu
+        if (!m_MenuManager.IsInGamePlay()) {
+            m_MenuManager.Update(m_Window, m_deltaTime.asSeconds());
+        }
+        else {
+            // Chỉ update game logic khi đang chơi và không pause
+            if (!m_MenuManager.IsGamePaused()) {
+                switch (m_eGameMode) {
+                case Play:
+                    UpdatePlay();
+                    break;
+                case LevelEditor:
+                    UpdateLevelEditor();
+                    break;
+                }
+            }
         }
         Draw();
     }
 }
 
 void Game::UpdatePlay() {
+
+    //Dừng mọi hoạt động nếu game pause
+    if (m_MenuManager.IsGamePaused()) {
+        return;
+    }
+
     m_fTimeInPlayMode += m_deltaTime.asSeconds();
     m_fDifficulty += m_deltaTime.asSeconds() / 10.0f;
     if (m_iPlayerHealth <= 0) {
@@ -222,6 +245,12 @@ void Game::UpdatePlay() {
 }
 
 void Game::UpdateTower() {
+
+    //Dừng update tower nếu game pause
+    if (m_MenuManager.IsGamePaused()) {
+        return;
+    }
+
     for (Entity& tower : m_Towers) {
         //Check if it is time to throw an axe
         tower.m_fAttackTimer -= m_deltaTime.asSeconds();
@@ -263,6 +292,12 @@ void Game::UpdateTower() {
 }
 
 void Game::UpdateAxe() {
+
+    //Dừng update axe nếu game pause
+    if (m_MenuManager.IsGamePaused()) {
+        return;
+    }
+
     for (Entity& axe : m_axes) {
         axe.m_fAxeTimer -= m_deltaTime.asSeconds();
         const float fAxeRotationSpeed = 360.0f;
@@ -274,6 +309,11 @@ void Game::UpdateAxe() {
 }
 
 void Game::CheckForDeletionRequest() {
+
+    if (m_MenuManager.IsGamePaused()) {
+        return;
+    }
+
     for (int i = m_axes.size() - 1; i >= 0; i--) {
         Entity& axe = m_axes[i];
         if (axe.IsDeletionRequested()) {
@@ -294,9 +334,10 @@ void Game::CheckForDeletionRequest() {
 }
 
 void Game::UpdateLevelEditor() {
-    m_enemies.clear(); // Clear enemies in level editor mode
-    m_axes.clear();
-    m_Towers.clear();
+
+    //m_enemies.clear(); // Clear enemies in level editor mode
+    //m_axes.clear();
+    //m_Towers.clear();
 
     m_iPlayerGold = 10;
     m_iPlayerHealth = 10;
@@ -308,6 +349,11 @@ void Game::UpdateLevelEditor() {
 }
 
 void Game::UpdatePhysics() {
+
+    if (m_MenuManager.IsGamePaused()) {
+        return;
+    }
+
     const float fMaxDeltaTime = 0.1f; // Cap the delta time to prevent large jumps
     const float fDeltaTime = std::min(m_deltaTime.asSeconds(), fMaxDeltaTime);
 
@@ -582,27 +628,129 @@ void Game::Draw() {
     // Erase the previous frame
     m_Window.clear();
 
-    for (const Entity& entity : m_AestheticTiles) {
-        m_Window.draw(entity);
+    // Nếu đang trong menu, chỉ vẽ menu
+    if (!m_MenuManager.IsInGamePlay()) {
+        m_MenuManager.Draw(m_Window);
     }
-    //Draw the game mode text 
-    m_Window.draw(m_GameModeText);
+    else {
+        // Vẽ game content khi đang chơi
+        for (const Entity& entity : m_AestheticTiles) {
+            m_Window.draw(entity);
+        }
 
-    switch (m_eGameMode) {
-    case Play:
-        DrawPlay();
-        break;
-    case LevelEditor:
-        DrawLevelEditor();
-        break;
+        // Draw the game mode text 
+        m_Window.draw(m_GameModeText);
+
+        switch (m_eGameMode) {
+        case Play:
+            DrawPlay();
+            break;
+        case LevelEditor:
+            DrawLevelEditor();
+            break;
+        }
+
+        if (m_MenuManager.IsGamePaused()) {
+            m_MenuManager.Draw(m_Window);
+        }
     }
+
     m_Window.display();
 }
 
 void Game::HandleInput() {
+    sf::Event event;
+    m_eScrollWheelInput = None;
+
+    while (m_Window.pollEvent(event)) {
+        // Xử lý sự kiện đóng cửa sổ
+        if (event.type == sf::Event::Closed) {
+            m_Window.close();
+            return;
+        }
+
+        // Nếu đang trong menu, chuyển input cho MenuManager
+        if (!m_MenuManager.IsInGamePlay()) {
+            m_MenuManager.HandleInput(event, m_Window);
+
+            // Kiểm tra nếu game đã bắt đầu từ menu
+            if (m_MenuManager.IsInGamePlay()) {
+                m_eGameMode = Play; // Luôn bắt đầu ở Play mode
+                m_GameModeText.setString("Play Mode");
+                // Reset game state khi bắt đầu game mới
+                ResetGameState();
+            }
+        }
+        else {
+            // Xử lý pause/resume music dựa trên trạng thái game
+            static bool wasPaused = false;
+            bool currentlyPaused = m_MenuManager.IsGamePaused();
+
+            if (currentlyPaused && !wasPaused) {
+                // Vừa chuyển sang trạng thái pause
+                SoundManager::getInstance().PauseBackgroundMusic();
+            }
+            else if (!currentlyPaused && wasPaused) {
+                // Vừa thoát khỏi trạng thái pause
+                SoundManager::getInstance().ResumeBackgroundMusic();
+            }
+            wasPaused = currentlyPaused;
+
+            // Nếu đang trong gameplay, kiểm tra pause menu trước
+            if (m_MenuManager.IsGamePaused()) {
+                // Nếu game đang pause, chuyển input cho MenuManager để xử lý pause menu
+                m_MenuManager.HandleInput(event, m_Window);
+            }
+            else {
+                // Xử lý input trong game bình thường
+                HandleGameInput(event);
+            }
+        }
+    }
+
+    // Chỉ xử lý keyboard input khi đang trong game
+    if (m_MenuManager.IsInGamePlay() && !m_MenuManager.IsGamePaused()) {
+        HandleKeyboardInput();
+    }
+}
+
+void Game::HandleGameInput(sf::Event& event) {
+    switch (event.type) {
+    case sf::Event::MouseWheelScrolled:
+        if (event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {
+            if (event.mouseWheelScroll.delta > 0) {
+                m_eScrollWheelInput = ScrollUp;
+            }
+            else {
+                m_eScrollWheelInput = ScrollDown;
+            }
+        }
+        break;
+    case sf::Event::KeyPressed:
+        // ESC để quay về menu
+        if (event.key.code == sf::Keyboard::Escape) {
+            m_MenuManager.TogglePauseMenu();
+        }
+        // Thêm phím Tab để chuyển đổi giữa Play và Level Editor (chỉ khi đang trong game)
+        else if (event.key.code == sf::Keyboard::Tab) {
+            if (m_eGameMode == Play) {
+                m_eGameMode = LevelEditor;
+                m_GameModeText.setString("Level Editor Mode");
+            }
+            else {
+                m_eGameMode = Play;
+                m_GameModeText.setString("Play Mode");
+            }
+        }
+        break;
+    }
+}
+
+void Game::HandleKeyboardInput() {
+    // Phím T để chuyển đổi giữa Play và Level Editor
     static bool bTwasPressedLastUpdate = false;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::T)) {
-        if (!bTwasPressedLastUpdate) {
+        if (!bTwasPressedLastUpdate) {  
             if (m_eGameMode == Play) {
                 m_eGameMode = LevelEditor;
                 m_GameModeText.setString("Level Editor Mode");
@@ -618,26 +766,7 @@ void Game::HandleInput() {
         bTwasPressedLastUpdate = false;
     }
 
-    sf::Event event;
-    m_eScrollWheelInput = None;
-    while (m_Window.pollEvent(event)) {
-        switch (event.type) {
-        case sf::Event::Closed:
-            m_Window.close();
-            break;
-        case sf::Event::MouseWheelScrolled:
-            if (event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {
-                if (event.mouseWheelScroll.delta > 0) {
-                    m_eScrollWheelInput = ScrollUp;
-                }
-                else {
-                    m_eScrollWheelInput = ScrollDown;
-                }
-            }
-            break;
-        }
-    }
-
+    // Xử lý input theo game mode
     switch (m_eGameMode) {
     case Play:
         HandlePlayInput();
@@ -646,6 +775,64 @@ void Game::HandleInput() {
         HandleLevelEditorInput();
         break;
     }
+}
+
+// Thêm các hàm mới để hỗ trợ menu
+void Game::StartGame(int level) {
+    m_iCurrentLevel = level;
+    m_MenuManager.SetMenuState(MenuManager::MenuState::GamePlay);
+    m_eGameMode = Play;
+    m_GameModeText.setString("Play Mode");
+
+    ResetGameState();
+
+    // Nếu có profile được chọn và đã lưu dữ liệu
+    if (m_MenuManager.GetCurrentProfile()) {
+        const MenuManager::PlayerProfile* profile = m_MenuManager.GetCurrentProfile();
+        if (!profile->savedTowers.empty()) {
+            m_MenuManager.SaveProfilesToFile();
+        }
+    }
+}
+
+void Game::ReturnToMenu() {
+    m_MenuManager.SetMenuState(MenuManager::MenuState::MainMenu);
+    m_GameModeText.setString("Menu Mode");
+
+    m_eGameMode = Play;
+
+    // Dừng nhạc nền game và phát nhạc menu
+    SoundManager::getInstance().StopBackgroundMusic();
+    SoundManager::getInstance().PlayBackgroundMusic();
+}
+
+void Game::ExitGame() {
+    // Nếu có profile đang được chọn
+    if (m_MenuManager.GetCurrentProfile()) {
+        MenuManager::PlayerProfile* profile = const_cast<MenuManager::PlayerProfile*>(m_MenuManager.GetCurrentProfile());
+
+        m_MenuManager.SaveProfilesToFile();
+
+        std::cout << "📁 Đã lưu dữ liệu profile: " << profile->name << std::endl;
+    }
+
+    m_Window.close();
+}
+
+void Game::ResetGameState() {
+    // Reset tất cả game state về trạng thái ban đầu
+    m_enemies.clear();
+    m_axes.clear();
+    m_Towers.clear();
+
+    m_iPlayerHealth = 10;
+    m_iPlayerGold = 10;
+    m_iGoldGainedThisUpdate = 0;
+    m_fTimeInPlayMode = 0.0f;
+    m_fDifficulty = 1.0f;
+    m_fGoldPerSecond = 0.0f;
+    m_fGoldPerSecondTimer = 0.0f;
+    m_bGameRunning = true;
 }
 
 void Game::CreateTileAtPosition(const sf::Vector2f& pos) {

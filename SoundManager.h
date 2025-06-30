@@ -20,6 +20,8 @@ public:
 
     // Play different types of sounds
     void PlayBackgroundMusic();
+    void PauseBackgroundMusic();
+    void ResumeBackgroundMusic();
     void StopBackgroundMusic();
     void PlayThrowingSound();
     void PlayHitSound();
